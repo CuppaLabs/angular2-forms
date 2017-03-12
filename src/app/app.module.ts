@@ -4,10 +4,15 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { LoginFormComponent } from './loginForm/login-form.component';
+import { EqualValidator } from './loginForm/password.match.directive';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginFormComponent,
+    EqualValidator
   ],
   imports: [
     BrowserModule,

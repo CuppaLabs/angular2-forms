@@ -1,0 +1,93 @@
+  <div class="col-md-6">
+    <h3>Angular 2 Form Validations Demo</h3>
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name"
+               required
+               pattern="[a-zA-Z][a-zA-Z ]+"
+               [(ngModel)]="model.name" name="name"
+               #name="ngModel">
+        <div [hidden]="name.valid || name.pristine"
+             class="alert alert-danger">
+              <div [hidden]="!name.hasError('required')">Name is required</div>
+          <div [hidden]="!name.hasError('pattern')">Only alphabetsallowed</div>
+          
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="name">Email Address</label>
+        <input type="text" class="form-control" id="emailaddress"
+               required
+               [(ngModel)]="model.email" name="email"
+               pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" 
+               #email="ngModel">
+        <div [hidden]="email.valid || email.pristine"
+             class="alert alert-danger">
+          <div [hidden]="!email.hasError('required')">Email is required</div>
+          <div [hidden]="!email.hasError('pattern')">Email format should be <small><b>joe@abc.com</b></small></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="name">Mobile Number</label>
+        <input type="text" class="form-control" id="mobilenumber"
+               required
+               [(ngModel)]="model.mobile" name="mobilenumber"
+               pattern="[0-9]*"
+               minlength="10"
+               maxlength="10" 
+               #mobile="ngModel">
+        <div [hidden]="mobile.valid || mobile.pristine"
+             class="alert alert-danger">
+          <div [hidden]="!mobile.hasError('minlength')">Mobile should be 10digit</div>
+          <div [hidden]="!mobile.hasError('required')">Mobile is required</div>
+          <div [hidden]="!mobile.hasError('pattern')">Mobile numberr should be only numbers</div>
+        </div>
+        
+      </div>
+      <div class="form-group">
+        <label for="name">Password</label>
+        <input type="password" class="form-control" id="password"
+               required
+               [(ngModel)]="model.password" name="password"
+               #password="ngModel">
+        <div [hidden]="password.valid || password.pristine"
+             class="alert alert-danger">
+          Password is required
+        </div> 
+      </div>
+      <div class="form-group">
+        <label for="name">Confirm Password</label>
+        <input type="password" class="form-control" id="confirmPassword"
+               required
+               validateEqual="password"
+               [(ngModel)]="model.confirmPassword" name="confirmPassword"
+               #confirmPassword="ngModel">
+        <div [hidden]="confirmPassword.valid || confirmPassword.pristine"
+             class="alert alert-danger">
+             Passwords did not match
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success btn-block" [disabled]="!loginForm.form.valid">Submit</button>
+    </form>
+  </div>
+  <div class="col-md-6">
+    <table class="table" [hidden]="!submitted">
+      <tr>
+        <td><label>Name</label></td>
+        <td>{{model.name}}</td>
+      </tr>
+      <tr>
+        <td><label>Email</label></td>
+        <td>{{model.email}}</td>
+      </tr>
+      <tr>
+        <td><label>Mobile</label></td>
+        <td>{{model.mobile}}</td>
+      </tr>
+      <tr>
+        <td><label>Password</label></td>
+        <td>{{model.password}}</td>
+      </tr>
+    </table>
+  </div>
